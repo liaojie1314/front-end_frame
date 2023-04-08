@@ -1,23 +1,18 @@
-import { legacy_createStore as createStore } from 'redux'
+import { legacy_createStore as createStore, combineReducers,applyMiddleware } from 'redux'
+import Global from './modules/global/reducer';
+import Info from './modules/info/reducer';
+import Order from './modules/order/reducer';
+import thunk from 'redux-thunk'
+//devtools
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-//定义数据
-const initState = {
-    count: 0,
-    name: 'a'
-}
+//集合模块
+const reducer = combineReducers({
+    Global,
+    Info,
+    Order
+})
 
-//关联action
-function countReducer(state = initState, action: any) {
-    switch (action.type) {
-        case "ADD_COUNT":
-            return { ...state, count: state.count + action.number }
-        case "UPDATE_NAME":
-            return { ...state, name: action.name }
-        default:
-            return state
-    }
-}
-
-const store = createStore(countReducer)
+const store = createStore(reducer,composeWithDevTools(applyMiddleware(thunk)))
 
 export default store;

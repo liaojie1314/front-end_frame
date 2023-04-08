@@ -16,7 +16,7 @@ export const router_item: Array<Object> = [
         label: '登录',
         key: 'login',
         // element: <Login />,
-        element: lazyLoad(React.lazy(()=>import("../views/login"))),
+        element: lazyLoad(React.lazy(() => import("../views/login"))),
         meta: {
             //不需要权限
             unWantedAuth: true,
@@ -27,8 +27,9 @@ export const router_item: Array<Object> = [
     {
         path: '/resetPas',
         label: '重置密码',
+        hidden: true,
         key: 'resetPas',
-        element: lazyLoad(React.lazy(()=>import("../views/login"))),
+        element: lazyLoad(React.lazy(() => import("../views/login"))),
         meta: {
             //不需要权限
             unWantedAuth: true,
@@ -37,26 +38,32 @@ export const router_item: Array<Object> = [
         }
     },
     {
-        path: '/layout',
         label: '控制台',
-        key: 'layout',
         element: <Layout />,
         children: [
-            {
-                path: 'home', key: 'home', label: '首页', element: lazyLoad(React.lazy(()=>import("../views/home"))),
-                children: [
-                    { path: 'home1', key: 'home1', label: '首页1', element: lazyLoad(React.lazy(()=>import("../views/home"))) },
-                    { path: 'user1', key: 'user1', label: '用户1', element: lazyLoad(React.lazy(()=>import("../views/user"))) },
-                ]
-            },
-            { path: 'user', key: 'user', label: '用户', element: lazyLoad(React.lazy(()=>import("../views/user"))) },
+            { path: 'home', key: 'home', label: '首页', element: lazyLoad(React.lazy(() => import("../views/home"))), },
+        ]
+    },
+    {
+        label: '信息管理',
+        element: <Layout />,
+        children: [
+            { path: 'info', key: 'info', label: '信息列表', element: lazyLoad(React.lazy(() => import("../views/info"))), },
+        ]
+    },
+    {
+        label: '订单管理',
+        element: <Layout />,
+        children: [
+            { path: 'order', key: 'order', label: '订单列表', element: lazyLoad(React.lazy(() => import("../views/order"))), },
         ]
     },
     {
         path: '/404',
+        hidden: true,
         label: '404',
         key: 'error',
-        element: lazyLoad(React.lazy(()=>import("../views/error/404"))),
+        element: lazyLoad(React.lazy(() => import("../views/error/404"))),
         meta: {
             //不需要权限
             unWantedAuth: true,

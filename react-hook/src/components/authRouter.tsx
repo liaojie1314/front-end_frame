@@ -1,8 +1,10 @@
 import { Navigate, useLocation } from "react-router-dom"
-import { matchRoute } from "../utils/util"
-import { router_item } from "../router"
+import { matchRoute } from "@/utils/util"
+import store from "@/redux"
+import { router_item } from "@/router"
+
 function AuthRouter(props: { children: JSX.Element }) {
-    const token = localStorage.getItem("token")
+    const token = store.getState().Global.token
     const { pathname } = useLocation()
     const router = matchRoute(pathname, router_item)
     if (router.meta?.unWantedAuth) {

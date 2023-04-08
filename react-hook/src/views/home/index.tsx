@@ -1,9 +1,10 @@
 import store from "../../redux";
+import { setToken, setUserName } from "../../redux/modules/global/action";
 
 function Home() {
   const updateCount = () => {
-    const addCount = { type: 'ADD_COUNT', number: 10 }
-    store.dispatch(addCount)
+    // store.dispatch(setToken('123456'))
+    // store.dispatch(setUserName('12'))
   }
   return (
     <div onClick={ updateCount }>首页</div>

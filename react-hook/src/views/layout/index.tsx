@@ -11,7 +11,7 @@ function Layout() {
   store.subscribe(() => {
     const store_data = store.getState()
     //console.log("订阅,查看数据变化:", store.getState());
-    setCount(store_data.count)
+    setCount(store_data.Order.count)
   })
   return (
     <section id='container'>

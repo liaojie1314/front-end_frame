@@ -22,9 +22,7 @@ function aside() {
         const copyKeyPath = JSON.parse(JSON.stringify(keyPath))
         setOpenKeys(copyKeyPath.slice(1))
         sessionStorage.setItem('openKeys', JSON.stringify(copyKeyPath.slice(1)))
-
-        const router = keyPath.reverse().join('/')
-        navigate('/' + router)
+        navigate('/' + copyKeyPath[0])
 
         //存储选中菜单的key
         sessionStorage.setItem('selectKeys', e.key)
