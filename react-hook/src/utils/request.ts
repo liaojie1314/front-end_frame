@@ -1,11 +1,12 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
-import { getCookie } from './cookies';
+import { getCookie, removeCookie } from './cookies';
+import { Button, Modal } from 'antd';
 
 //借口返回的对象
 export interface Result<T> {
     data: T,
     message: string,
-    code: number
+    resCode: number
 }
 
 const service: AxiosInstance = axios.create({
@@ -26,20 +27,29 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
 
 // 添加响应拦截器
 service.interceptors.response.use((response: AxiosResponse) => {
-    //业务状态码code
+    //业务状态码resCode
     const data = response.data
-    if (data.code === 0) {
+    if (data.resCode === 0) {
         return data;
     } else {
 
         return Promise.reject(data)
     }
 }, (error: AxiosError) => {
+    //token 失效
     const status = error.response?.status
     switch (status) {
         case 400:
             break;
         case 401:
+            Modal.confirm({
+                title: "提示",
+                content: "token失效,请重新登录",
+                onOk: () => {
+                    removeCookie('token');
+                    window.location.replace('#/login');
+                }
+            })
             break;
         default:
             break;

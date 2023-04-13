@@ -1,10 +1,12 @@
-import store from "../../redux";
-import { setToken, setUserName } from "../../redux/modules/global/action";
+import { removeCookie } from "@/utils/cookies";
+import { error } from "@/api/error";
 
 function Home() {
   const updateCount = () => {
-    // store.dispatch(setToken('123456'))
-    // store.dispatch(setUserName('12'))
+    error({}).then(()=>{
+
+    })
+    //removeCookie
   }
   return (
     <div onClick={ updateCount }>首页</div>
